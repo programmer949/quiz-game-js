@@ -1,10 +1,10 @@
 ﻿// Declarations
-const questionText = document.getElementById("question_text");
+const questionText = document.getElementById("question");
 const correct = document.getElementById("correct");
 const incorrect = document.getElementById("incorrect");
-const answerCount = document.getElementById("answer-count");
+const answerCount = document.getElementById("count");
 const answers = document.getElementById("answers");
-const countdown = document.getElementById("c");
+const countdown = document.querySelector("p");
 const soundButton = document.querySelector(".sound-button");
 const body = document.body;
 const nav = document.querySelector("nav");
@@ -37,7 +37,7 @@ const mainAz = [
         answer: [0],
     },
     {
-        question: "Windows OS-ni kim yaratdı?",
+        question: "Windows əməliyyat sistemini kim yaratdı?",
         options: [
             { option: "Jeff Bezos" },
             { option: "Shantanu Narayen" },
@@ -1162,7 +1162,7 @@ const startGame = () => {
                     h3.remove();
                     selected = "Azərbaycanca";
                     localStorage.setItem("selected", selected);
-                    window.location.reload();
+                    location.reload();
                 };
                 const English = document.createElement("li");
                 English.innerText = "English";
@@ -1175,7 +1175,7 @@ const startGame = () => {
                     h3.remove();
                     selected = "English";
                     localStorage.setItem("selected", selected);
-                    window.location.reload();
+                    location.reload();
                 };
                 const Русский = document.createElement("li");
                 Русский.innerText = "Русский";
@@ -1188,7 +1188,7 @@ const startGame = () => {
                     h3.remove();
                     selected = "Русский";
                     localStorage.setItem("selected", selected);
-                    window.location.reload();
+                    location.reload();
                 };
                 body.append(container);
                 container.append(h3, languageMenu);
@@ -1212,7 +1212,7 @@ const startGame = () => {
 };
 
 // Start the game when loading finished
-document.addEventListener("load", startGame());
+startGame();
 
 // Clearing screen when answer is chosen
 clear = () => {
@@ -1230,7 +1230,7 @@ const checkAnswers = (e) => {
         if (e.target.innerText == gameArray[i].options[id].option) {
             countInterval = 1;
             correctAnswerCount++;
-            e.target.classList.add("true_answer");
+            e.target.classList.add("correct_answer");
             if (!mute) {
                 correct.play();
             }
@@ -1240,7 +1240,7 @@ const checkAnswers = (e) => {
             answerCount.innerHTML = `<i>${correctAnswerCount} / ${gameArray.length}</i>`;
         } else {
             countInterval = 1;
-            e.target.classList.add("wrong_answer");
+            e.target.classList.add("incorrect_answer");
             if (!mute) {
                 incorrect.play();
             }
@@ -1253,7 +1253,7 @@ const checkAnswers = (e) => {
 
 // Creating game over screen
 const gameOver = () => {
-    document.body.innerHTML = `<div class="gameOver"><i style="font-size: 14px;">${correctAnswerCount} / ${gameArray.length}</i></div>`;
+    document.body.innerHTML = `<div class="game-over"><i style="font-size: 14px;">${correctAnswerCount} / ${gameArray.length}</i></div>`;
 };
 
 // Checking our countdown interval
